@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginVM
+
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-3">
+            <main class="form-signin align-text-top">
+                <form asp-controller="User" asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Email">E-Mail Adresi</label>
+                        <input type="text" asp-for="Email" class="form-control" id="floatingInput" placeholder="E-mail adresini gir">
+                        <span asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" asp-for="IsRemember" value="true" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Beni Hatırla
+                            </label>
+                        </div>
+                    </div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <label>@ViewBag.Message</label>
+                        @*<script type="text/javascript" charset="utf-8">
+                                 window.onload = function () { alert("@ViewBag.Message"); };
+                        </script>*@
+                    }
+                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+
+
+                </form>
+            </main>
+        </div>
+    </div>
+</div>

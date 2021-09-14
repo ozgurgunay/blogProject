@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model PostListVM
+@inject IHttpContextAccessor httpContextAccessor
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group-horizontal">
+                <nav class="navbar navbar-light bg-light">
+                    <div class="container-fluid">
+                        <span class="navbar-brand">En çok okunan makaleler :</span>
+                    </div>
+                </nav>
+                @foreach (PostVM post in Model.Posts)
+                {
+                    @Html.ActionLink(post.Title, "Index", "Home", new { id = post.PostId },
+                   new { @class = "list-group-item list-group-item-action" })
+                }
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="container">
+            <div class="card card-custom" id="kt_card_2">
+                <div class="card-header">
+
+
+                    <div class="card-toolbar">
+                        <a class="card-title">
+                            @foreach (PostVM item in Model.Posts)
+                            {
+                                <span class="card-label" id="titleCard">@item.Title</span>
+                            }
+                        </a>
+
+                        <a class="btn btn-icon btn-sm btn-primary mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" >
+                            <i class="ki ki-arrow-down icon-nm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z" />
+                                </svg>
+                            </i>
+                        </a>
+                        <a class="btn btn-icon btn-sm btn-warning" data-card-tool="remove" data-toggle="tooltip" data-placement="top" >
+                            <i class="ki ki-close icon-nm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20"><path fill="white" fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+                            </i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="card-body" id="summaryCard">
+                    dsdasd
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*@Html.Partial("ListPost")*@

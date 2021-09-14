@@ -1,0 +1,69 @@
+﻿
+@inject IHttpContextAccessor httpContextAccessor
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Anasayfa</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="About" >Hakkımızda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-controller="Post" asp-action="Index" >Konu Listesi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Makale Listesi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Yazar Detayları</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-end">
+
+                    @if (string.IsNullOrEmpty(httpContextAccessor.HttpContext.Session.GetString("eMail")))
+                    {
+                        <a asp-controller="User" asp-action="Login" type="button" class="btn btn-primary me-2">Giriş Yap</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="SaveUser" asp-action="Index" type="button" class="btn btn-primary me-2">Kullanıcı Bilgileri</a>
+
+                        @*<a class="btn btn-primary me-2">
+                            @httpContextAccessor.HttpContext.Session.GetString("firstName")
+                            @httpContextAccessor.HttpContext.Session.GetString("lastName")
+                        </a>*@
+
+                        <a asp-controller="User" asp-action="LogOut" type="button" class="btn btn-outline-primary me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20"><path fill="white" fill-rule="evenodd" d="M2.343 13.657A8 8 0 1113.657 2.343 8 8 0 012.343 13.657zM6.03 4.97a.75.75 0 00-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 101.06 1.06L8 9.06l1.97 1.97a.75.75 0 101.06-1.06L9.06 8l1.97-1.97a.75.75 0 10-1.06-1.06L8 6.94 6.03 4.97z"></path></svg>
+                        </a>
+                    }
+                </div>
+            </div>
+</nav>
+    </header>
+
+    <div>
+        @RenderBody()
+        <script src="~/jquery/jquery.min.js"></script>
+        @RenderSection("scripts", false)
+    </div>
+
+
+</body>
+</html>

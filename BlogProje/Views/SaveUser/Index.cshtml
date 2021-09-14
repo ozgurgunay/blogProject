@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model UserSaveVM
+
+<div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+        <div class="col-12 col-md-7 col-lg-4 col-xl-3">
+
+            <h2 class="text-center">Kullanıcı Bilgilerini Güncelleme</h2>
+
+            <div class="form-outline mb-6">
+                <label for="FirstName" class="form-label">Ad</label>
+                <input type="text" class="form-control" id="firstName">
+            </div>
+
+            <div class="form-outline mb-6">
+                <label for="LastName" class="form-label">Soyad</label>
+                <input type="text" class="form-control" id="lastName">
+            </div>
+
+            <div class="form-outline mb-6">
+                <label for="UserName" class="form-label">Kullanıcı Adı</label>
+                <input type="text" class="form-control" id="userName">
+            </div>
+
+            <div class="form-outline mb-6">
+                <label for="Email" class="form-label">E-Mail</label>
+                <input type="text" class="form-control" id="eMail">
+            </div>
+
+            <div class="form-outline mb-6">
+                <label for="Explanation" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="explanation"></textarea>
+            </div>
+
+            <div class="form-outline mb-6">
+                <label for="UserName" class="form-label">Fotoğraf Seç</label>
+            </div>
+
+            <div class="form-outline mb-6">
+                <input type="submit" class="btn btn-primary" id="addUser" value="Bilgileri Kaydet" />
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#addUser").click(function () {
+            var user = {
+                "firstname": $("#firstName").val(),
+                "lastname": $("#lastName").val(),
+                "username": $("#userName").val(),
+                "email": $("#eMail").val(),
+                "explanation": $("#explanation").val()
+            }
+            $.ajax({
+                url: "/SaveUser/UpdateUser",
+                type: "POST",
+                data: user,
+                success: function (respons) {
+                    if (respons == "ok") {
+                        alert("İşlem başarılı")
+                    }
+                    else {
+                        alert("İşlem başarısız.")
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
